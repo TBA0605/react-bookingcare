@@ -10,7 +10,7 @@ import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authenticati
 
 import { path } from '../utils'
 
-import Home from '../routes/Home';
+import Home from '../routes/Home';  
 // import Login from '../routes/Login';
 import Login from './Auth/Login';
 
@@ -43,14 +43,19 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <Router history={history}>
+                {/* history dùng để lưu lại lịch sử, giữ các thông tin trên trang khi refresh */}
+                <Router history={history}>  
                     <div className="main-container">
                         <ConfirmModal />
+                        {/* check login, nếu login rồi thì render ra <header/> */}
                         {this.props.isLoggedIn && <Header />}
 
                         <span className="content-container">
                             <Switch>
+                                {/* có 3 rout home, login, system được import phía trên cùng */}
+                                {/* khai báo hết path trong file constant(giữ control click vào path trong {path.HOME}) */}
                                 <Route path={path.HOME} exact component={(Home)} />
+                                {/* dùng Hàm bọc HOC userIsNotAuthenticated, userIsAuthenticated để check xem đã đăng nhập chưa, nếu chưa thì sẽ vào rout home vì home chưa bọc gì */}
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                             </Switch>
