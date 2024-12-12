@@ -37,7 +37,7 @@ class Login extends Component {
       errMessage: "",
     });
     try {
-      let data = await handleLoginApi(this.state.username, this.state.password);
+      let data = await handleLoginApi(this.state.username, this.state.password);  //data từ server xử lý xong gửi qua client
       //nếu có lỗi thì show lỗi
       if (data && data.errCode !== 0) {
         this.setState({
